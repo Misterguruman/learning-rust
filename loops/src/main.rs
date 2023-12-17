@@ -1,29 +1,36 @@
-use std::{thread, time};
+use std::{thread, time::{self, Duration}};
 
 fn main() {
-    let delay = time::Duration::from_secs(1);
-    let mut plz_no_infinite_loops: i32 = 5;
+    const DELAY: Duration = time::Duration::from_secs(0);
+    const CREDITS: [&str; 3] = ["Joseph", "Paul", "Langford"];
+    let countdown_range = 1..6;
 
-    loop {
-        if plz_no_infinite_loops < 0 {
+    // loop { replacing manual exit of "loop" with "for x in collection" method
+    for i in countdown_range.rev() {
+        if i < 0 {
             break;
         }
 
-        println!("Counting down to liftoff: {}", plz_no_infinite_loops);
-        plz_no_infinite_loops = plz_no_infinite_loops - 1;
-        thread::sleep(delay);
+        println!("Counting down to liftoff: {}", i);
+        thread::sleep(DELAY);
     };
 
     println!("You have reached liftoff!");
-    plz_no_infinite_loops = 0;
 
-    while plz_no_infinite_loops <= 5 {
-        let altitude_offset = plz_no_infinite_loops * 10_000;
+    // while plz_no_infinite_loops <= 5 {
+    // creating example of using unnamed range to iterate
+    for i in 1..6 {
+        let altitude_offset = i * 10_000;
 
         println!("Your current altitude is {}", altitude_offset);
-        plz_no_infinite_loops = plz_no_infinite_loops + 1;
-        thread::sleep(delay);
+
+        thread::sleep(DELAY);
     };
 
-    println!("You made it to space!")
+    println!("You made it to space!");
+
+    for name in CREDITS {
+        println!("Made possible by: {}", name);
+        thread::sleep(DELAY);
+    }
 }
