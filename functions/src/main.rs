@@ -1,11 +1,11 @@
-fn main() {
-    println!("Hello, world!");
+fn main() { 
+    let mut value: String = String::from("Hello");
 
-    let x: i32 = defined_after_main();
+    defined_after_main(&mut value);
 
-    println!("X is equal to: {}", x)
+    println!("{}", value);
 }
 
-fn defined_after_main() -> i32 {
-    5
+fn defined_after_main(statement:&mut String) -> () {
+    statement.push_str(", World.");
 }
